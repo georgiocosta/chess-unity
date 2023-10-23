@@ -10,11 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2437275402712637512, guid: 84d0a2c7cb6671f46b1c0e355226b0ac, type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.5235849
       objectReference: {fileID: 0}
     - target: {fileID: 2437275402712637512, guid: 84d0a2c7cb6671f46b1c0e355226b0ac, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.7124203
       objectReference: {fileID: 0}
     - target: {fileID: 2437275402712637512, guid: 84d0a2c7cb6671f46b1c0e355226b0ac, type: 3}
       propertyPath: m_Color.r
@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5065952341360350009, guid: 84d0a2c7cb6671f46b1c0e355226b0ac, type: 3}
       propertyPath: m_Name
-      value: B1 Variant
+      value: White Square
       objectReference: {fileID: 0}
     - target: {fileID: 8391346692476160934, guid: 84d0a2c7cb6671f46b1c0e355226b0ac, type: 3}
       propertyPath: m_LocalPosition.x
