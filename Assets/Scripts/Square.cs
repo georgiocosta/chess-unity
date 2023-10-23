@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Square : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Piece piece;
+
+    public int x, y;
+
+    public Piece GetPiece()
     {
-        
+        return piece;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetPiece(Piece newPiece)
     {
-        
+        piece = newPiece;
     }
 }
