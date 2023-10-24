@@ -6,7 +6,7 @@ public class Square : MonoBehaviour
 {
     private Piece piece;
 
-    public int x, y;
+    private int x, y;
 
     public Piece GetPiece()
     {
@@ -16,5 +16,15 @@ public class Square : MonoBehaviour
     public void SetPiece(Piece newPiece)
     {
         piece = newPiece;
+    }
+
+    public int GetX()
+    {
+        return x;
+    }
+
+    public int GetY()
+    {
+        return y;
     }
 }
