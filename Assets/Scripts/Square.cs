@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Square : MonoBehaviour
+public class Square
 {
     private Piece piece;
 
     private int x, y;
+
+    public Square(int x, int y, Piece piece)
+    {
+        this.x = x;
+        this.y = y;
+        this.piece = piece;
+    }
 
     public Piece GetPiece()
     {
