@@ -2,24 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Square
+public class Square : MonoBehaviour
 {
     private Piece piece;
 
     private int x, y;
-
-    public Square(int x, int y)
-    {
-        this.x = x;
-        this.y = y;
-    }
-
-    public Square(int x, int y, Piece piece)
-    {
-        this.x = x;
-        this.y = y;
-        this.piece = piece;
-    }
 
     public Piece GetPiece()
     {
@@ -31,11 +18,16 @@ public class Square
         piece = newPiece;
     }
 
+    public void SetXY(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+
     public int GetX()
     {
         return x;
     }
-
     public int GetY()
     {
         return y;
