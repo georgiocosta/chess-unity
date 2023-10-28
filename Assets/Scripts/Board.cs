@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Board : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Square[,] squares = new Square[8,8];
+
     void Start()
     {
-        
+        SetUpBoard();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SetUpBoard()
     {
-        
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j++)
+            {
+                squares[i,j] = new Square(i, j);
+                Debug.Log(squares[i,j].GetX() + " " + squares[i, j].GetY());
+            }
+        }
     }
 }
