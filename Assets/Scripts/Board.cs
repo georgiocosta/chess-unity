@@ -9,12 +9,16 @@ public class Board : MonoBehaviour
 
     private Square[,] squares = new Square[8,8];
 
+    [SerializeField]
+    private Pawn[] pawns = new Pawn[8];
+
     void Start()
     {
-       SetUpBoard();
+       AssignSquares();
+       SetUpPieces();
     }
 
-    private void SetUpBoard()
+    private void AssignSquares()
     {
         int k = 0;
 
@@ -29,6 +33,14 @@ public class Board : MonoBehaviour
 
                 Debug.Log(squares[i,j].GetX() + " " + squares[i, j].GetY());
             }
+        }
+    }
+
+    private void SetUpPieces()
+    {
+        for(int i = 0; i < 8; i++)
+        {
+            squares[1, i].SetPiece(pawns[i]);
         }
     }
 }
