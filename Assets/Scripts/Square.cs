@@ -33,4 +33,9 @@ public class Square : MonoBehaviour
     {
         return y;
     }
+
+    public void OnClicked()
+    {
+        Debug.Log("Clicked " + transform.name);
+    }
 }

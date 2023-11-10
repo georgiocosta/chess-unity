@@ -18,6 +18,25 @@ public class Board : MonoBehaviour
        SetUpPieces();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            Debug.Log("Clicked");
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
+            if (hit.collider != null)
+            {
+                if (hit.transform.GetComponent<Square>())
+                {
+                    hit.transform.GetComponent<Square>().OnClicked();
+                }
+            }
+        }
+    }
+
     private void AssignSquares()
     {
         int k = 0;
