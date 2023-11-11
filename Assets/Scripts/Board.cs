@@ -7,7 +7,8 @@ public class Board : MonoBehaviour
     [SerializeField]
     private Transform squaresTransform;
 
-    private Square[,] squares = new Square[8,8];
+    private Square[,] squares = new Square[8, 8];
+    private Square selectedSquare;
 
     [SerializeField]
     private Pawn[] pawns = new Pawn[8];
@@ -27,11 +28,16 @@ public class Board : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 
+            if (selectedSquare != null)
+            {
+                selectedSquare.Deselect();
+            }
             if (hit.collider != null)
             {
                 if (hit.transform.GetComponent<Square>())
                 {
-                    hit.transform.GetComponent<Square>().OnClicked();
+                    selectedSquare = hit.transform.GetComponent<Square>();
+                    hit.transform.GetComponent<Square>().Select();
                 }
             }
         }

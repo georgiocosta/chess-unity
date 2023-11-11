@@ -6,6 +6,8 @@ public class Square : MonoBehaviour
 {
     [SerializeField]
     private Piece piece;
+    [SerializeField]
+    private GameObject highlight;
 
     private int x, y;
 
@@ -34,8 +36,19 @@ public class Square : MonoBehaviour
         return y;
     }
 
-    public void OnClicked()
+    public void Select()
     {
         Debug.Log("Clicked " + transform.name);
+        SetHighlight(true);
+    }
+
+    public void Deselect()
+    {
+        SetHighlight(false);
+    }
+
+    public void SetHighlight(bool isSet)
+    {
+        highlight.SetActive(isSet);
     }
 }

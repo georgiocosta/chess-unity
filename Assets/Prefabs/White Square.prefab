@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: White Square
       objectReference: {fileID: 0}
+    - target: {fileID: 6221923765761640703, guid: 84d0a2c7cb6671f46b1c0e355226b0ac, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8391346692476160934, guid: 84d0a2c7cb6671f46b1c0e355226b0ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.25
