@@ -34,10 +34,22 @@ public class Board : MonoBehaviour
             }
             if (hit.collider != null)
             {
-                if (hit.transform.GetComponent<Square>())
+                if (hit.transform.GetComponent<Square>().GetPiece())
                 {
                     selectedSquare = hit.transform.GetComponent<Square>();
+                    Piece selectedPiece = selectedSquare.GetPiece();
+                    List<int[]> moves = selectedPiece.GetMoves();
+                    
                     hit.transform.GetComponent<Square>().Select();
+
+                    foreach(int[] move in moves)
+                    {
+                        if(selectedSquare.GetX() + move[1] <= 8 && selectedSquare.GetX() + move[1] >= 0
+                            && selectedSquare.GetY() + move[0] <= 8 && selectedSquare.GetY() + move[0] >= 0)
+                        {
+                            squares[selectedSquare.GetX() + move[1], selectedSquare.GetY() + move[0]].Select();
+                        }
+                    }
                 }
             }
         }

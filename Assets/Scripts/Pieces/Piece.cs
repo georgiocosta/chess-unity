@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public List<int[]> moves = new List<int[]>();
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public List<int[]> GetMoves()
+    {
+        return moves;
     }
 }

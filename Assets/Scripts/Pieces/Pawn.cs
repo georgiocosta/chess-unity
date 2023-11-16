@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Pawn : Piece
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        SetUpMoves();
     }
 
-    // Update is called once per frame
-    void Update()
+    void SetUpMoves()
     {
-        
+        moves.Add(new int[] {0, 1});
     }
 }
