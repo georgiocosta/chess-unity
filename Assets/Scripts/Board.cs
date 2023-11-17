@@ -9,14 +9,17 @@ public class Board : MonoBehaviour
 
     private Square[,] squares = new Square[8, 8];
     private Square selectedSquare;
+    private List<Square> movableSquares;
 
     [SerializeField]
     private Pawn[] pawns = new Pawn[8];
 
     void Start()
     {
-       AssignSquares();
-       SetUpPieces();
+        AssignSquares();
+        SetUpPieces();
+
+        movableSquares = new List<Square>();
     }
 
     void Update()
@@ -31,6 +34,15 @@ public class Board : MonoBehaviour
             if (selectedSquare != null)
             {
                 selectedSquare.Deselect();
+
+                if(movableSquares.Count > 0)
+                {
+                    foreach(Square movableSquare in movableSquares)
+                    {
+                        movableSquare.Deselect();
+                    }
+                    movableSquares.Clear();
+                }
             }
             if (hit.collider != null)
             {
@@ -47,7 +59,9 @@ public class Board : MonoBehaviour
                         if(selectedSquare.GetX() + move[1] <= 8 && selectedSquare.GetX() + move[1] >= 0
                             && selectedSquare.GetY() + move[0] <= 8 && selectedSquare.GetY() + move[0] >= 0)
                         {
-                            squares[selectedSquare.GetX() + move[1], selectedSquare.GetY() + move[0]].Select();
+                            Square moveSquare = squares[selectedSquare.GetX() + move[1], selectedSquare.GetY() + move[0]];
+                            movableSquares.Add(moveSquare);
+                            moveSquare.Select();
                         }
                     }
                 }
