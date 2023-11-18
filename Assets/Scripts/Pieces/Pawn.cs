@@ -11,6 +11,6 @@ public class Pawn : Piece
 
     void SetUpMoves()
     {
-        moves.Add(new int[] {0, 1});
+        moves.Add(new int[] {1, 0});
     }
 }

@@ -56,10 +56,10 @@ public class Board : MonoBehaviour
 
                     foreach(int[] move in moves)
                     {
-                        if(selectedSquare.GetX() + move[1] <= 8 && selectedSquare.GetX() + move[1] >= 0
-                            && selectedSquare.GetY() + move[0] <= 8 && selectedSquare.GetY() + move[0] >= 0)
+                        if(selectedSquare.GetX() + move[0] <= 8 && selectedSquare.GetX() + move[0] >= 0
+                            && selectedSquare.GetY() + move[1] <= 8 && selectedSquare.GetY() + move[1] >= 0)
                         {
-                            Square moveSquare = squares[selectedSquare.GetX() + move[1], selectedSquare.GetY() + move[0]];
+                            Square moveSquare = squares[selectedSquare.GetX() + move[0], selectedSquare.GetY() + move[1]];
                             movableSquares.Add(moveSquare);
                             moveSquare.Select();
                         }
