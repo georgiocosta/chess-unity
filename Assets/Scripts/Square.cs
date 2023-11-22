@@ -38,7 +38,7 @@ public class Square : MonoBehaviour
 
     public void Select()
     {
-        Debug.Log("Clicked " + transform.name);
+        //Debug.Log("Clicked " + transform.name);
         SetHighlight(true);
     }
 

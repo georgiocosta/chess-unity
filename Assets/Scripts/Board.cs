@@ -10,6 +10,7 @@ public class Board : MonoBehaviour
     private Square[,] squares = new Square[8, 8];
     private Square selectedSquare;
     private List<Square> movableSquares;
+    private Piece selectedPiece;
 
     [SerializeField]
     private Pawn[] pawns = new Pawn[8];
@@ -30,34 +31,38 @@ public class Board : MonoBehaviour
 
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-
-            if (selectedSquare != null)
-            {
-                selectedSquare.Deselect();
-
-                if(movableSquares.Count > 0)
-                {
-                    foreach(Square movableSquare in movableSquares)
-                    {
-                        movableSquare.Deselect();
-                    }
-                    movableSquares.Clear();
-                }
-            }
+            
             if (hit.collider != null)
             {
+                Square clickedSquare = hit.transform.GetComponent<Square>();
+
+                //Move selected
+                if (movableSquares.Find(x => x.name == clickedSquare.name))
+                {
+                    Debug.Log("Selected move");
+                    selectedSquare.SetPiece(null);
+                    clickedSquare.SetPiece(selectedPiece);
+                    selectedPiece.transform.position = clickedSquare.transform.position;
+                    ClearSelection();
+                }
+                //Undo selection
+                else if (selectedSquare != null)
+                {
+                    ClearSelection();
+                }
+                //Piece selected
                 if (hit.transform.GetComponent<Square>().GetPiece())
                 {
                     selectedSquare = hit.transform.GetComponent<Square>();
-                    Piece selectedPiece = selectedSquare.GetPiece();
+                    hit.transform.GetComponent<Square>().Select();
+                    selectedPiece = selectedSquare.GetPiece();
                     List<int[]> moves = selectedPiece.GetMoves();
                     
-                    hit.transform.GetComponent<Square>().Select();
 
                     foreach(int[] move in moves)
                     {
-                        if(selectedSquare.GetX() + move[0] <= 8 && selectedSquare.GetX() + move[0] >= 0
-                            && selectedSquare.GetY() + move[1] <= 8 && selectedSquare.GetY() + move[1] >= 0)
+                        if(selectedSquare.GetX() + move[0] < 8 && selectedSquare.GetX() + move[0] > 0
+                            && selectedSquare.GetY() + move[1] < 8 && selectedSquare.GetY() + move[1] > 0)
                         {
                             Square moveSquare = squares[selectedSquare.GetX() + move[0], selectedSquare.GetY() + move[1]];
                             movableSquares.Add(moveSquare);
@@ -65,6 +70,10 @@ public class Board : MonoBehaviour
                         }
                     }
                 }
+            }
+            else
+            {
+                ClearSelection();
             }
         }
     }
@@ -92,6 +101,21 @@ public class Board : MonoBehaviour
         for(int i = 0; i < 8; i++)
         {
             squares[1, i].SetPiece(pawns[i]);
+        }
+    }
+
+    private void ClearSelection()
+    {
+        selectedSquare.Deselect();
+
+        if (movableSquares.Count > 0)
+        {
+            foreach (Square movableSquare in movableSquares)
+            {
+                movableSquare.Deselect();
+            }
+            movableSquares.Clear();
+            selectedPiece = null;
         }
     }
 }
