@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class King : Piece
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        SetUpMoves();
     }
 
-    // Update is called once per frame
-    void Update()
+    void SetUpMoves()
     {
-        
+        moves.Add(new int[] { 1, 0 });
+        moves.Add(new int[] { -1, 0 });
+        moves.Add(new int[] { 0, 1 });
+        moves.Add(new int[] { 0, -1 });
+        moves.Add(new int[] { 1, 1 });
+        moves.Add(new int[] { -1, 1 });
+        moves.Add(new int[] { 1, -1 });
+        moves.Add(new int[] { -1, -1 });
     }
 }
