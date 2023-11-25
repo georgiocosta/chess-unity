@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class Knight : Piece
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        SetUpMoves();
     }
 
-    // Update is called once per frame
-    void Update()
+    void SetUpMoves()
     {
-        
+        moves.Add(new int[] { 1, 2 });
+        moves.Add(new int[] { 1, -2 });
+        moves.Add(new int[] { 2, 1 });
+        moves.Add(new int[] { 2, -1 });
+        moves.Add(new int[] { -1, 2 });
+        moves.Add(new int[] { -1, -2 });
+        moves.Add(new int[] { -2, 1 });
+        moves.Add(new int[] { -2, -1 });
     }
 }

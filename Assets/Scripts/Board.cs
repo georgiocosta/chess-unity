@@ -15,6 +15,8 @@ public class Board : MonoBehaviour
     [SerializeField]
     private Pawn[] pawns = new Pawn[8];
     [SerializeField]
+    private Knight[] knights = new Knight[2];
+    [SerializeField]
     private King king;
 
     void Start()
@@ -104,6 +106,8 @@ public class Board : MonoBehaviour
         {
             squares[1, i].SetPiece(pawns[i]);
         }
+        squares[0, 1].SetPiece(knights[0]);
+        squares[0, 6].SetPiece(knights[1]);
         squares[0, 4].SetPiece(king);
     }
 

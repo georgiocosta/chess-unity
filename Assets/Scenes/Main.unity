@@ -871,6 +871,9 @@ MonoBehaviour:
   - {fileID: 1041281128}
   - {fileID: 1481655654}
   - {fileID: 1549594593}
+  knights:
+  - {fileID: 1661381262}
+  - {fileID: 1908060353}
   king: {fileID: 1009989731}
 --- !u!1001 &343694454
 PrefabInstance:
@@ -4638,6 +4641,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8391346692476160934, guid: 84d0a2c7cb6671f46b1c0e355226b0ac, type: 3}
   m_PrefabInstance: {fileID: 1643181964}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1661381262 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7875871105921600648, guid: 95d4c88f520d7294cad8d2337e99450e, type: 3}
+  m_PrefabInstance: {fileID: 1525094398}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650aa3025bbffe647a1fd23e77c422ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1676177763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5250,6 +5264,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1150736032919226564, guid: 95d4c88f520d7294cad8d2337e99450e, type: 3}
   m_PrefabInstance: {fileID: 1723346168}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1908060353 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7875871105921600648, guid: 95d4c88f520d7294cad8d2337e99450e, type: 3}
+  m_PrefabInstance: {fileID: 1723346168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650aa3025bbffe647a1fd23e77c422ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1926666551
 PrefabInstance:
   m_ObjectHideFlags: 0
