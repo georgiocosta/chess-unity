@@ -15,6 +15,8 @@ public class Board : MonoBehaviour
     [SerializeField]
     private Pawn[] pawns = new Pawn[8];
     [SerializeField]
+    private Rook[] rooks = new Rook[2];
+    [SerializeField]
     private Knight[] knights = new Knight[2];
     [SerializeField]
     private King king;
@@ -106,9 +108,11 @@ public class Board : MonoBehaviour
         {
             squares[1, i].SetPiece(pawns[i]);
         }
+        squares[0, 0].SetPiece(rooks[0]);
         squares[0, 1].SetPiece(knights[0]);
-        squares[0, 6].SetPiece(knights[1]);
         squares[0, 4].SetPiece(king);
+        squares[0, 6].SetPiece(knights[1]);
+        squares[0, 7].SetPiece(rooks[1]);
     }
 
     private void ClearSelection()

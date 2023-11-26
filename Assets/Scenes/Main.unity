@@ -871,6 +871,9 @@ MonoBehaviour:
   - {fileID: 1041281128}
   - {fileID: 1481655654}
   - {fileID: 1549594593}
+  rooks:
+  - {fileID: 1107416995}
+  - {fileID: 1903738615}
   knights:
   - {fileID: 1661381262}
   - {fileID: 1908060353}
@@ -2979,6 +2982,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1150736032919226564, guid: 0405c6ccc8b1bd64780aa305a64c831d, type: 3}
   m_PrefabInstance: {fileID: 1107416993}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1107416995 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1945587560840276957, guid: 0405c6ccc8b1bd64780aa305a64c831d, type: 3}
+  m_PrefabInstance: {fileID: 1107416993}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80228846ba383044198c9c2a76d44f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1113997616 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1150736032919226564, guid: 0815cf54e4a61d142a25a7dbb0c893d7, type: 3}
@@ -5259,6 +5273,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2617343547329462733, guid: 8a8b37772e3092e4cb23f106f9663d7c, type: 3}
   m_PrefabInstance: {fileID: 1887483547}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1903738615 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1945587560840276957, guid: 0405c6ccc8b1bd64780aa305a64c831d, type: 3}
+  m_PrefabInstance: {fileID: 1046581551}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80228846ba383044198c9c2a76d44f06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1908060352 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1150736032919226564, guid: 95d4c88f520d7294cad8d2337e99450e, type: 3}

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Rook : Piece
 {
-    // Start is called before the first frame update
     void Start()
     {
-        
+        SetUpMoves();
     }
 
-    // Update is called once per frame
-    void Update()
+    void SetUpMoves()
     {
-        
+        for (int i = 1; i < 9; i++)
+        {
+            moves.Add(new int[] { i, 0 });
+            moves.Add(new int[] { -i, 0 });
+            moves.Add(new int[] { 0, i });
+            moves.Add(new int[] { 0, -i });
+        }
     }
 }
