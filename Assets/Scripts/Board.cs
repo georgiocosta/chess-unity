@@ -21,6 +21,8 @@ public class Board : MonoBehaviour
     [SerializeField]
     private Bishop[] bishops = new Bishop[2];
     [SerializeField]
+    private Queen queen;
+    [SerializeField]
     private King king;
 
     void Start()
@@ -69,8 +71,8 @@ public class Board : MonoBehaviour
 
                     foreach(int[] move in moves)
                     {
-                        if(selectedSquare.GetX() + move[0] < 8 && selectedSquare.GetX() + move[0] > 0
-                            && selectedSquare.GetY() + move[1] < 8 && selectedSquare.GetY() + move[1] > 0)
+                        if(selectedSquare.GetX() + move[0] < 8 && selectedSquare.GetX() + move[0] >= 0
+                            && selectedSquare.GetY() + move[1] < 8 && selectedSquare.GetY() + move[1] >= 0)
                         {
                             Square moveSquare = squares[selectedSquare.GetX() + move[0], selectedSquare.GetY() + move[1]];
                             movableSquares.Add(moveSquare);
@@ -113,6 +115,7 @@ public class Board : MonoBehaviour
         squares[0, 0].SetPiece(rooks[0]);
         squares[0, 1].SetPiece(knights[0]);
         squares[0, 2].SetPiece(bishops[0]);
+        squares[0, 3].SetPiece(queen);
         squares[0, 4].SetPiece(king);
         squares[0, 5].SetPiece(bishops[1]);
         squares[0, 6].SetPiece(knights[1]);
