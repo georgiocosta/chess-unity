@@ -13,17 +13,17 @@ public class Board : MonoBehaviour
     private Piece selectedPiece;
 
     [SerializeField]
-    private Pawn[] pawns = new Pawn[8];
+    private Pawn[] pawns = new Pawn[16];
     [SerializeField]
-    private Rook[] rooks = new Rook[2];
+    private Rook[] rooks = new Rook[4];
     [SerializeField]
-    private Knight[] knights = new Knight[2];
+    private Knight[] knights = new Knight[4];
     [SerializeField]
-    private Bishop[] bishops = new Bishop[2];
+    private Bishop[] bishops = new Bishop[4];
     [SerializeField]
-    private Queen queen;
+    private Queen[] queens = new Queen[2];
     [SerializeField]
-    private King king;
+    private King[] kings = new King[2];
 
     void Start()
     {
@@ -108,6 +108,7 @@ public class Board : MonoBehaviour
 
     private void SetUpPieces()
     {
+        //White pieces
         for(int i = 0; i < 8; i++)
         {
             squares[1, i].SetPiece(pawns[i]);
@@ -116,14 +117,34 @@ public class Board : MonoBehaviour
         squares[0, 0].SetPiece(rooks[0]);
         squares[0, 1].SetPiece(knights[0]);
         squares[0, 2].SetPiece(bishops[0]);
-        squares[0, 3].SetPiece(queen);
-        squares[0, 4].SetPiece(king);
+        squares[0, 3].SetPiece(queens[0]);
+        squares[0, 4].SetPiece(kings[0]);
         squares[0, 5].SetPiece(bishops[1]);
         squares[0, 6].SetPiece(knights[1]);
         squares[0, 7].SetPiece(rooks[1]);
+        squares[0, 0].SetPiece(rooks[2]);
         for (int i = 0; i < 8; i++)
         {
             squares[0, i].GetPiece().SetWhite(true);
+        }
+
+        //Black pieces
+        for (int i = 8; i < 16; i++)
+        {
+            squares[6, i - 8].SetPiece(pawns[i]);
+            pawns[i].SetWhite(false);
+        }
+        squares[7, 0].SetPiece(rooks[2]);
+        squares[7, 1].SetPiece(knights[2]);
+        squares[7, 2].SetPiece(bishops[2]);
+        squares[7, 3].SetPiece(queens[1]);
+        squares[7, 4].SetPiece(kings[1]);
+        squares[7, 5].SetPiece(bishops[3]);
+        squares[7, 6].SetPiece(knights[3]);
+        squares[7, 7].SetPiece(rooks[3]);
+        for (int i = 0; i < 8; i++)
+        {
+            squares[7, i].GetPiece().SetWhite(false);
         }
     }
 
