@@ -111,6 +111,7 @@ public class Board : MonoBehaviour
         for(int i = 0; i < 8; i++)
         {
             squares[1, i].SetPiece(pawns[i]);
+            pawns[i].SetWhite(true);
         }
         squares[0, 0].SetPiece(rooks[0]);
         squares[0, 1].SetPiece(knights[0]);
@@ -120,6 +121,10 @@ public class Board : MonoBehaviour
         squares[0, 5].SetPiece(bishops[1]);
         squares[0, 6].SetPiece(knights[1]);
         squares[0, 7].SetPiece(rooks[1]);
+        for (int i = 0; i < 8; i++)
+        {
+            squares[0, i].GetPiece().SetWhite(true);
+        }
     }
 
     private void ClearSelection()

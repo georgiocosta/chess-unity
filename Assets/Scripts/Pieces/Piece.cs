@@ -6,6 +6,8 @@ public class Piece : MonoBehaviour
 {
     public List<int[]> moves = new List<int[]>();
 
+    public bool isWhite;
+
     void Start()
     {
         
@@ -19,5 +21,19 @@ public class Piece : MonoBehaviour
     public List<int[]> GetMoves()
     {
         return moves;
+    }
+
+    public void SetWhite(bool isWhite)
+    {
+        this.isWhite = isWhite;
+        SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (isWhite == true)
+        {
+            spriteRenderer.color = Color.white;
+        }
+        else
+        {
+            spriteRenderer.color = Color.black;
+        }
     }
 }
