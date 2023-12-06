@@ -25,12 +25,15 @@ public class Board : MonoBehaviour
     [SerializeField]
     private King[] kings = new King[2];
 
+    private bool isWhiteTurn;
+
     void Start()
     {
         AssignSquares();
         SetUpPieces();
 
         movableSquares = new List<Square>();
+        isWhiteTurn = true;
     }
 
     void Update()
@@ -54,6 +57,7 @@ public class Board : MonoBehaviour
                     clickedSquare.SetPiece(selectedPiece);
                     selectedPiece.transform.position = clickedSquare.transform.position;
                     ClearSelection();
+                    isWhiteTurn = !isWhiteTurn;
                 }
                 //Undo selection
                 else if (selectedSquare != null)
@@ -63,20 +67,22 @@ public class Board : MonoBehaviour
                 //Piece selected
                 if (hit.transform.GetComponent<Square>().GetPiece())
                 {
-                    selectedSquare = hit.transform.GetComponent<Square>();
-                    hit.transform.GetComponent<Square>().Select();
-                    selectedPiece = selectedSquare.GetPiece();
-                    List<int[]> moves = selectedPiece.GetMoves();
-                    
+                    if (isWhiteTurn == hit.transform.GetComponent<Square>().GetPiece().IsWhite()) {
+                        selectedSquare = hit.transform.GetComponent<Square>();
+                        hit.transform.GetComponent<Square>().Select();
+                        selectedPiece = selectedSquare.GetPiece();
+                        List<int[]> moves = selectedPiece.GetMoves();
 
-                    foreach(int[] move in moves)
-                    {
-                        if(selectedSquare.GetX() + move[0] < 8 && selectedSquare.GetX() + move[0] >= 0
-                            && selectedSquare.GetY() + move[1] < 8 && selectedSquare.GetY() + move[1] >= 0)
+
+                        foreach (int[] move in moves)
                         {
-                            Square moveSquare = squares[selectedSquare.GetX() + move[0], selectedSquare.GetY() + move[1]];
-                            movableSquares.Add(moveSquare);
-                            moveSquare.Select();
+                            if (selectedSquare.GetX() + move[0] < 8 && selectedSquare.GetX() + move[0] >= 0
+                                && selectedSquare.GetY() + move[1] < 8 && selectedSquare.GetY() + move[1] >= 0)
+                            {
+                                Square moveSquare = squares[selectedSquare.GetX() + move[0], selectedSquare.GetY() + move[1]];
+                                movableSquares.Add(moveSquare);
+                                moveSquare.Select();
+                            }
                         }
                     }
                 }

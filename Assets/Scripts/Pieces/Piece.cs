@@ -36,4 +36,9 @@ public class Piece : MonoBehaviour
             spriteRenderer.color = Color.black;
         }
     }
+
+    public bool IsWhite()
+    {
+        return isWhite;
+    }
 }
