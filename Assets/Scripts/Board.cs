@@ -80,8 +80,11 @@ public class Board : MonoBehaviour
                                 && selectedSquare.GetY() + move[1] < 8 && selectedSquare.GetY() + move[1] >= 0)
                             {
                                 Square moveSquare = squares[selectedSquare.GetX() + move[0], selectedSquare.GetY() + move[1]];
-                                movableSquares.Add(moveSquare);
-                                moveSquare.Select();
+                                if (!moveSquare.GetPiece())
+                                {
+                                    movableSquares.Add(moveSquare);
+                                    moveSquare.Select();
+                                }
                             }
                         }
                     }
