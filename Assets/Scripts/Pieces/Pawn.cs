@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Pawn : Piece
 {
-    void Start()
+    void Awake()
     {
         SetUpMoves();
     }
@@ -12,5 +12,15 @@ public class Pawn : Piece
     void SetUpMoves()
     {
         moves.Add(new int[] {1, 0});
+    }
+
+    public override void SetWhite(bool isWhite)
+    {
+        base.SetWhite(isWhite);
+
+        if (isWhite == false)
+        {
+            moves[0] = new int[] { -1, 0 };
+        }
     }
 }

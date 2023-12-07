@@ -23,7 +23,7 @@ public class Piece : MonoBehaviour
         return moves;
     }
 
-    public void SetWhite(bool isWhite)
+    public virtual void SetWhite(bool isWhite)
     {
         this.isWhite = isWhite;
         SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
