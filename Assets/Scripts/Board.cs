@@ -40,14 +40,14 @@ public class Board : MonoBehaviour
     {
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            Debug.Log("Clicked");
-
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
             
             if (hit.collider != null)
             {
                 Square clickedSquare = hit.transform.GetComponent<Square>();
+
+                Debug.Log("Clicked " + clickedSquare.GetX() + ", " + clickedSquare.GetY());
 
                 //Move selected
                 if (movableSquares.Find(x => x.name == clickedSquare.name))
@@ -131,7 +131,6 @@ public class Board : MonoBehaviour
         squares[0, 5].SetPiece(bishops[1]);
         squares[0, 6].SetPiece(knights[1]);
         squares[0, 7].SetPiece(rooks[1]);
-        squares[0, 0].SetPiece(rooks[2]);
         for (int i = 0; i < 8; i++)
         {
             squares[0, i].GetPiece().SetWhite(true);
