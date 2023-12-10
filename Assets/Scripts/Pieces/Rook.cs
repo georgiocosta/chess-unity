@@ -13,10 +13,10 @@ public class Rook : Piece
     {
         for (int i = 1; i < 9; i++)
         {
-            moves.Add(new int[] { i, 0 });
-            moves.Add(new int[] { -i, 0 });
-            moves.Add(new int[] { 0, i });
-            moves.Add(new int[] { 0, -i });
+            AddLine(new int[] { 1, 0 }, 8);
+            AddLine(new int[] { -1, 0 }, 8);
+            AddLine(new int[] { 0, 1 }, 8);
+            AddLine(new int[] { 0, -1 }, 8);
         }
     }
 }

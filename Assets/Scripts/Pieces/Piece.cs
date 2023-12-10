@@ -23,6 +23,14 @@ public class Piece : MonoBehaviour
         return moves;
     }
 
+    public void AddLine(int[] direction, int magnitude)
+    {
+        for(int i = 1; i < magnitude; i++)
+        {
+            moves.Add(new int[] {direction[0] * i, direction[1] * i});
+        }
+    }
+
     public virtual void SetWhite(bool isWhite)
     {
         this.isWhite = isWhite;

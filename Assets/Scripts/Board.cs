@@ -74,16 +74,21 @@ public class Board : MonoBehaviour
                         List<int[]> moves = selectedPiece.GetMoves();
 
 
-                        foreach (int[] move in moves)
+                        for (int i = 0; i < moves.Count; i++)
                         {
-                            if (selectedSquare.GetX() + move[0] < 8 && selectedSquare.GetX() + move[0] >= 0
-                                && selectedSquare.GetY() + move[1] < 8 && selectedSquare.GetY() + move[1] >= 0)
+                            if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
+                                && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
                             {
-                                Square moveSquare = squares[selectedSquare.GetX() + move[0], selectedSquare.GetY() + move[1]];
+                                Square moveSquare = squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]];
                                 if (!moveSquare.GetPiece())
                                 {
                                     movableSquares.Add(moveSquare);
                                     moveSquare.Select();
+                                }
+                                else
+                                {
+                                    //set a variable m for multiples to skip, then move to next iteration of loop if i % m 
+                                    i += (7 - ((i + 1) % 7));
                                 }
                             }
                         }

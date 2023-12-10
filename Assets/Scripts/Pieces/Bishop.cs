@@ -11,12 +11,9 @@ public class Bishop : Piece
 
     void SetUpMoves()
     {
-        for (int i = 1; i < 9; i++)
-        {
-            moves.Add(new int[] { i, i });
-            moves.Add(new int[] { -i, i });
-            moves.Add(new int[] { i, -i });
-            moves.Add(new int[] { -i, -i });
-        }
+        AddLine(new int[] { 1, 1 }, 8);
+        AddLine(new int[] { -1, 1 }, 8);
+        AddLine(new int[] { 1, -1 }, 8);
+        AddLine(new int[] { -1, -1 }, 8);
     }
 }
