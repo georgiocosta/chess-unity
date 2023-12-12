@@ -7,6 +7,7 @@ public class Rook : Piece
     void Start()
     {
         SetUpMoves();
+        isLinearMover = true;
     }
 
     void SetUpMoves()

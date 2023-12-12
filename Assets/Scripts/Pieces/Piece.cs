@@ -8,9 +8,11 @@ public class Piece : MonoBehaviour
 
     public bool isWhite;
 
+    public bool isLinearMover = false;
+
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -48,5 +50,10 @@ public class Piece : MonoBehaviour
     public bool IsWhite()
     {
         return isWhite;
+    }
+
+    public bool IsLinearMover()
+    {
+        return isLinearMover;
     }
 }

@@ -85,7 +85,7 @@ public class Board : MonoBehaviour
                                     movableSquares.Add(moveSquare);
                                     moveSquare.Select();
                                 }
-                                else
+                                else if (selectedPiece.IsLinearMover())
                                 {
                                     //set a variable m for multiples to skip, then move to next iteration of loop if i % m 
                                     i += (7 - ((i + 1) % 7));
