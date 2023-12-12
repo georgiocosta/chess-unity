@@ -52,6 +52,15 @@ public class Board : MonoBehaviour
                 //Move selected
                 if (movableSquares.Find(x => x.name == clickedSquare.name))
                 {
+                    //Capture
+                    if (clickedSquare.GetPiece() != null)
+                    {
+                        if (clickedSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
+                        {
+                            clickedSquare.Capture();
+                        }
+                    }
+                    //Regular move
                     Debug.Log("Selected move");
                     selectedSquare.SetPiece(null);
                     clickedSquare.SetPiece(selectedPiece);
@@ -80,12 +89,13 @@ public class Board : MonoBehaviour
                                 && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
                             {
                                 Square moveSquare = squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]];
-                                if (!moveSquare.GetPiece())
+                                if (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
                                 {
                                     movableSquares.Add(moveSquare);
                                     moveSquare.Select();
                                 }
-                                else if (selectedPiece.IsLinearMover())
+
+                                if (moveSquare.GetPiece() && selectedPiece.IsLinearMover())
                                 {
                                     //set a variable m for multiples to skip, then move to next iteration of loop if i % m 
                                     i += (7 - ((i + 1) % 7));

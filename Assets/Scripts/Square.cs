@@ -51,4 +51,10 @@ public class Square : MonoBehaviour
     {
         highlight.SetActive(isSet);
     }
+
+    public void Capture()
+    {
+        Destroy(piece.gameObject);
+        SetPiece(null);
+    }
 }
