@@ -62,6 +62,14 @@ public class Board : MonoBehaviour
                     }
                     //Regular move
                     Debug.Log("Selected move");
+                    if(selectedPiece.GetType() == typeof(Pawn))
+                    {
+                        Pawn selectedPawn = (Pawn)selectedPiece;
+                        if (selectedPawn.IsFirstMove())
+                        {
+                            selectedPawn.MakeFirstMove();
+                        }
+                    }
                     selectedSquare.SetPiece(null);
                     clickedSquare.SetPiece(selectedPiece);
                     selectedPiece.transform.position = clickedSquare.transform.position;
