@@ -108,6 +108,10 @@ public class Board : MonoBehaviour
                                     //set a variable m for multiples to skip, then move to next iteration of loop if i % m 
                                     i += (7 - ((i + 1) % 7));
                                 }
+                                else if(moveSquare.GetPiece() && selectedPiece.GetType() == typeof(Pawn))
+                                {
+                                    i += 1;
+                                }
                             }
                         }
                     }
