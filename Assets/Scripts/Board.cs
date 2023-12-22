@@ -86,7 +86,7 @@ public class Board : MonoBehaviour
                 {
                     if (isWhiteTurn == hit.transform.GetComponent<Square>().GetPiece().IsWhite()) {
                         selectedSquare = hit.transform.GetComponent<Square>();
-                        hit.transform.GetComponent<Square>().Select();
+                        hit.transform.GetComponent<Square>().SetHighlight(true);
                         selectedPiece = selectedSquare.GetPiece();
                         List<int[]> moves = selectedPiece.GetMoves();
 
@@ -101,7 +101,7 @@ public class Board : MonoBehaviour
                                      && selectedPiece.GetType() != typeof(Pawn))
                                 {
                                     movableSquares.Add(moveSquare);
-                                    moveSquare.Select();
+                                    moveSquare.SetHighlight(true);
                                 }
 
                                 if (moveSquare.GetPiece() && selectedPiece.IsLinearMover())
@@ -186,13 +186,13 @@ public class Board : MonoBehaviour
 
     private void ClearSelection()
     {
-        selectedSquare.Deselect();
+        selectedSquare.SetHighlight(false);
 
         if (movableSquares.Count > 0)
         {
             foreach (Square movableSquare in movableSquares)
             {
-                movableSquare.Deselect();
+                movableSquare.SetHighlight(false);
             }
             movableSquares.Clear();
             selectedPiece = null;

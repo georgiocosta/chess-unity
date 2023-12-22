@@ -36,17 +36,6 @@ public class Square : MonoBehaviour
         return y;
     }
 
-    public void Select()
-    {
-        //Debug.Log("Clicked " + transform.name);
-        SetHighlight(true);
-    }
-
-    public void Deselect()
-    {
-        SetHighlight(false);
-    }
-
     public void SetHighlight(bool isSet)
     {
         highlight.SetActive(isSet);
