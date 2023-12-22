@@ -97,7 +97,8 @@ public class Board : MonoBehaviour
                                 && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
                             {
                                 Square moveSquare = squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]];
-                                if (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
+                                if (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite()
+                                     && selectedPiece.GetType() != typeof(Pawn))
                                 {
                                     movableSquares.Add(moveSquare);
                                     moveSquare.Select();
