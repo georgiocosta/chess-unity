@@ -43,6 +43,7 @@ public class Square : MonoBehaviour
 
     public void Capture()
     {
+        Debug.Log("Capture");
         Destroy(piece.gameObject);
         SetPiece(null);
     }

@@ -90,28 +90,65 @@ public class Board : MonoBehaviour
                         selectedPiece = selectedSquare.GetPiece();
                         List<int[]> moves = selectedPiece.GetMoves();
 
-
-                        for (int i = 0; i < moves.Count; i++)
+                        if (selectedPiece.GetType() != typeof(Pawn))
                         {
-                            if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
-                                && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
+                            for (int i = 0; i < moves.Count; i++)
                             {
-                                Square moveSquare = squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]];
-                                if (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite()
-                                     && selectedPiece.GetType() != typeof(Pawn))
+                                if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
+                                    && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
                                 {
-                                    movableSquares.Add(moveSquare);
-                                    moveSquare.SetHighlight(true);
-                                }
 
-                                if (moveSquare.GetPiece() && selectedPiece.IsLinearMover())
-                                {
-                                    //set a variable m for multiples to skip, then move to next iteration of loop if i % m 
-                                    i += (7 - ((i + 1) % 7));
+                                    Square moveSquare = squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]];
+
+                                    if (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
+                                    {
+                                        movableSquares.Add(moveSquare);
+                                        moveSquare.SetHighlight(true);
+                                    }
+
+                                    if (moveSquare.GetPiece() && selectedPiece.IsLinearMover())
+                                    {
+                                        //set a variable m for multiples to skip, then move to next iteration of loop if i % m 
+                                        i += (7 - ((i + 1) % 7));
+                                    }
                                 }
-                                else if(moveSquare.GetPiece() && selectedPiece.GetType() == typeof(Pawn))
+                            }
+                        }
+                        else
+                        {
+                            Pawn selectedPawn = (Pawn)selectedPiece;
+                            List<Square> moveSquares = new List<Square>();
+
+                            for (int i = 0; i < moves.Count; i++)
+                            {
+                                if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
+                                    && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
                                 {
-                                    i += 1;
+
+                                    moveSquares.Add(squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]]);
+                                }
+                            }
+
+                            if (!moveSquares[0].GetPiece()) {
+                                movableSquares.Add(moveSquares[0]);                                
+                                moveSquares[0].SetHighlight(true);
+                                
+                                if (selectedPawn.IsFirstMove())
+                                {
+                                    movableSquares.Add(moveSquares[1]);
+                                    moveSquares[1].SetHighlight(true);
+                                }
+                            }
+
+                            for (int i = 2; i < moveSquares.Count; i++)
+                            {
+                                if (moveSquares[i].GetPiece())
+                                {
+                                    if (moveSquares[i].GetPiece().IsWhite() != selectedPiece.IsWhite())
+                                    {
+                                        movableSquares.Add(moveSquares[i]);
+                                        moveSquares[i].SetHighlight(true);
+                                    }
                                 }
                             }
                         }

@@ -16,6 +16,8 @@ public class Pawn : Piece
     {
         moves.Add(new int[] {1, 0});
         moves.Add(new int[] {2, 0});
+        moves.Add(new int[] { 1, 1 });
+        moves.Add(new int[] { 1, -1});
     }
 
     public override void SetWhite(bool isWhite)
@@ -26,6 +28,8 @@ public class Pawn : Piece
         {
             moves[0] = new int[] { -1, 0 };
             moves[1] = new int[] { -2, 0};
+            moves[2] = new int[] { -1, 1 };
+            moves[3] = new int[] { -1, -1 };
         }
     }
 
@@ -36,6 +40,5 @@ public class Pawn : Piece
 
     public void MakeFirstMove() {
         isFirstMove = false;
-        moves.RemoveAt(1);
     }
 }
