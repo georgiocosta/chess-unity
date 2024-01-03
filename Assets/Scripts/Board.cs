@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -90,7 +89,7 @@ public class Board : MonoBehaviour
                         selectedPiece = selectedSquare.GetPiece();
                         List<int[]> moves = selectedPiece.GetMoves();
 
-                        if (selectedPiece.GetType() != typeof(Pawn))
+                        if (selectedPiece.GetType() != typeof(Pawn) && selectedPiece.GetType() != typeof(King))
                         {
                             for (int i = 0; i < moves.Count; i++)
                             {
@@ -114,7 +113,7 @@ public class Board : MonoBehaviour
                                 }
                             }
                         }
-                        else
+                        else if (selectedPiece.GetType() == typeof(Pawn))
                         {
                             Pawn selectedPawn = (Pawn)selectedPiece;
                             List<Square> moveSquares = new List<Square>();
@@ -148,6 +147,24 @@ public class Board : MonoBehaviour
                                     {
                                         movableSquares.Add(moveSquares[i]);
                                         moveSquares[i].SetHighlight(true);
+                                    }
+                                }
+                            }
+                        }
+                        else if(selectedPiece.GetType() == typeof(King))
+                        {
+                            for (int i = 0; i < moves.Count; i++)
+                            {
+                                if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
+                                    && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
+                                {
+
+                                    Square moveSquare = squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]];
+
+                                    if (IsSafeSquare(selectedPiece.isWhite, moveSquare) && (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite()))
+                                    {
+                                        movableSquares.Add(moveSquare);
+                                        moveSquare.SetHighlight(true);
                                     }
                                 }
                             }
@@ -234,5 +251,234 @@ public class Board : MonoBehaviour
             movableSquares.Clear();
             selectedPiece = null;
         }
+    }
+
+    private bool IsSafeSquare(bool isWhite, Square square)
+    {
+        int x = square.GetX();
+        int y = square.GetY();
+
+        //Horizontal check
+        for(int i = x; i < 8; i++)
+        {
+            if(squares[i, y].GetPiece())
+            {
+                Piece piece = squares[i, y].GetPiece();
+
+                if (piece.isWhite == isWhite)
+                {
+                    break;
+                }
+                else if (i == x + 1 && piece.GetType() == typeof(King))
+                {
+                    return false;
+                }
+                else if(piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        for (int i = x; i > 0; i--)
+        {
+            if (squares[i, y].GetPiece())
+            {
+                Piece piece = squares[i, y].GetPiece();
+
+                if(piece.isWhite == isWhite)
+                {
+                    break;
+                }
+                else if (i == x - 1 && piece.GetType() == typeof(King))
+                {
+                    return false;
+                }
+                else if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        //Vertical check
+        for (int i = y; i < 8; i++)
+        {
+            if (squares[x, i].GetPiece())
+            {
+                Piece piece = squares[x, i].GetPiece();
+
+                if (piece.isWhite == isWhite)
+                {
+                    break;
+                }
+                else if (i == y + 1 && piece.GetType() == typeof(King))
+                {
+                    return false;
+                }
+                else if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        for (int i = y; i > 0; i--)
+        {
+            if (squares[x, i].GetPiece())
+            {
+                Piece piece = squares[x, i].GetPiece();
+
+                if (piece.isWhite == isWhite)
+                {
+                    break;
+                }
+                else if (i == y - 1 && piece.GetType() == typeof(King))
+                {
+                    return false;
+                }
+                else if (piece.GetType() == typeof(Rook) || piece.GetType() == typeof(Queen))
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        //Diagonal check
+        for (int i = 1; x + i < 8 && y + i < 8; i++)
+        {
+            if (squares[x + i, y + i].GetPiece())
+            {
+                Piece piece = squares[x + i, y + i].GetPiece();
+
+                if (piece.isWhite == isWhite)
+                {
+                    break;
+                }
+                else if (i == 1 && piece.GetType() == typeof(King))
+                {
+                    return false;
+                }
+                else if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        for (int i = 1; x - i > 0 && y + i < 8; i++)
+        {
+            if (squares[x - i, y + i].GetPiece())
+            {
+                Piece piece = squares[x - i, y + i].GetPiece();
+
+                if (piece.isWhite == isWhite)
+                {
+                    break;
+                }
+                else if (i == 1 && piece.GetType() == typeof(King))
+                {
+                    return false;
+                }
+                else if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        for (int i = 1; x + i < 8 && y - i > 0; i++)
+        {
+            if (squares[x + i, y - i].GetPiece())
+            {
+                Piece piece = squares[x + i, y - i].GetPiece();
+
+                if (piece.isWhite == isWhite)
+                {
+                    break;
+                }
+                else if (i == 1 && piece.GetType() == typeof(King))
+                {
+                    return false;
+                }
+                else if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        for (int i = 1; x - i > 0 && y - i > 0; i++)
+        {
+            if (squares[x - i, y - i].GetPiece())
+            {
+                Piece piece = squares[x - i, y - i].GetPiece();
+
+                if (piece.isWhite == isWhite)
+                {
+                    break;
+                }
+                else if (i == 1 && piece.GetType() == typeof(King))
+                {
+                    return false;
+                }
+                else if (piece.GetType() == typeof(Bishop) || piece.GetType() == typeof(Queen))
+                {
+                    return false;
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+
+        //Knight check
+        List<int[]> knightMoves = knights[0].GetMoves(); 
+
+        foreach(int[] move in knightMoves)
+        {
+            if(x + move[0] < 8 && y + move[1] < 8 && x + move[0] >= 0 && y + move[1] >= 0)
+            {
+                if(squares[x + move[0], y + move[1]].GetPiece())
+                {
+                    Piece piece = squares[x + move[0], y + move[1]].GetPiece();
+
+                    if (piece.isWhite != isWhite && piece.GetType() == typeof(Knight))
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 }

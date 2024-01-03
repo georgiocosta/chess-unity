@@ -657,6 +657,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pawn B2
       objectReference: {fileID: 0}
+    - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2624,6 +2628,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pawn D2
       objectReference: {fileID: 0}
+    - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2903,6 +2911,10 @@ PrefabInstance:
     - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
       propertyPath: m_Name
       value: Pawn F2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3986,6 +3998,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pawn H2
       objectReference: {fileID: 0}
+    - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4842,6 +4858,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pawn G2
       objectReference: {fileID: 0}
+    - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5127,6 +5147,10 @@ PrefabInstance:
     - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
       propertyPath: m_Name
       value: Pawn E2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5911,6 +5935,10 @@ PrefabInstance:
     - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
       propertyPath: m_Name
       value: Pawn C2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7359,6 +7387,10 @@ PrefabInstance:
     - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
       propertyPath: m_Name
       value: Pawn A2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2429065376547561243, guid: 9cae48b8746eb224297701c90526f432, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
