@@ -267,7 +267,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    break;
+                    continue;
                 }
                 else if (i == x + 1 && piece.GetType() == typeof(King))
                 {
@@ -292,7 +292,7 @@ public class Board : MonoBehaviour
 
                 if(piece.isWhite == isWhite)
                 {
-                    break;
+                    continue;
                 }
                 else if (i == x - 1 && piece.GetType() == typeof(King))
                 {
@@ -318,7 +318,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    break;
+                    continue;
                 }
                 else if (i == y + 1 && piece.GetType() == typeof(King))
                 {
@@ -343,7 +343,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    break;
+                    continue;
                 }
                 else if (i == y - 1 && piece.GetType() == typeof(King))
                 {
@@ -368,7 +368,11 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    break;
+                    continue;
+                }
+                else if (isWhite == true && i == 1 && piece.GetType() == typeof(Pawn))
+                {
+                    return false;
                 }
                 else if (i == 1 && piece.GetType() == typeof(King))
                 {
@@ -393,7 +397,11 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    break;
+                    continue;
+                }
+                else if (isWhite == false && i == 1 && piece.GetType() == typeof(Pawn))
+                {
+                    return false;
                 }
                 else if (i == 1 && piece.GetType() == typeof(King))
                 {
@@ -418,7 +426,11 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    break;
+                    continue;
+                }
+                else if (isWhite == true && i == 1 && piece.GetType() == typeof(Pawn))
+                {
+                    return false;
                 }
                 else if (i == 1 && piece.GetType() == typeof(King))
                 {
@@ -443,7 +455,11 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    break;
+                    continue;
+                }
+                else if (isWhite == false && i == 1 && piece.GetType() == typeof(Pawn))
+                {
+                    return false;
                 }
                 else if (i == 1 && piece.GetType() == typeof(King))
                 {
