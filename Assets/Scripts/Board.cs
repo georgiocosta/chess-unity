@@ -47,19 +47,19 @@ public class Board : MonoBehaviour
             
             if (hit.collider != null)
             {
-                Square clickedSquare = hit.transform.GetComponent<Square>();
+                Square targetSquare = hit.transform.GetComponent<Square>();
 
-                Debug.Log("Clicked " + clickedSquare.GetX() + ", " + clickedSquare.GetY());
+                Debug.Log("Clicked " + targetSquare.GetX() + ", " + targetSquare.GetY());
 
                 //Move selected
-                if (movableSquares.Find(x => x.name == clickedSquare.name))
+                if (movableSquares.Find(x => x.name == targetSquare.name))
                 {
                     //Capture
-                    if (clickedSquare.GetPiece() != null)
+                    if (targetSquare.GetPiece() != null)
                     {
-                        if (clickedSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
+                        if (targetSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
                         {
-                            clickedSquare.Capture();
+                            targetSquare.Capture();
                         }
                     }
                     //Regular move
@@ -76,9 +76,10 @@ public class Board : MonoBehaviour
                     {
                         kingSquares[selectedPiece.isWhite ? 0 : 1] = selectedSquare;
                     }
+                    //Movement
                     selectedSquare.SetPiece(null);
-                    clickedSquare.SetPiece(selectedPiece);
-                    selectedPiece.transform.position = clickedSquare.transform.position;
+                    targetSquare.SetPiece(selectedPiece);
+                    selectedPiece.transform.position = targetSquare.transform.position;
                     ClearSelection();
                     isWhiteTurn = !isWhiteTurn;
                     check = false;
