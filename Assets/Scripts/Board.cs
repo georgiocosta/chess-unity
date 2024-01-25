@@ -9,6 +9,7 @@ public class Board : MonoBehaviour
     private Square[,] squares = new Square[8, 8];
     private Square selectedSquare;
     private List<Square> movableSquares;
+    private Square[] kingSquares = new Square[2];
     private Piece selectedPiece;
 
     [SerializeField]
@@ -25,6 +26,7 @@ public class Board : MonoBehaviour
     private King[] kings = new King[2];
 
     private bool isWhiteTurn;
+    private bool check;
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class Board : MonoBehaviour
 
         movableSquares = new List<Square>();
         isWhiteTurn = true;
+        check = false;
     }
 
     void Update()
@@ -69,11 +72,16 @@ public class Board : MonoBehaviour
                             selectedPawn.MakeFirstMove();
                         }
                     }
+                    else if(selectedPiece.GetType() == typeof(King))
+                    {
+                        kingSquares[selectedPiece.isWhite ? 0 : 1] = selectedSquare;
+                    }
                     selectedSquare.SetPiece(null);
                     clickedSquare.SetPiece(selectedPiece);
                     selectedPiece.transform.position = clickedSquare.transform.position;
                     ClearSelection();
                     isWhiteTurn = !isWhiteTurn;
+                    check = false;
                 }
                 //Undo selection
                 else if (selectedSquare != null)
@@ -82,12 +90,26 @@ public class Board : MonoBehaviour
                 }
                 //Piece selected
                 if (hit.transform.GetComponent<Square>().GetPiece())
-                {
+                { 
                     if (isWhiteTurn == hit.transform.GetComponent<Square>().GetPiece().IsWhite()) {
+                        //Determining check before allowing selection
+                        King king = isWhiteTurn ? kings[0] : kings[1];
+
+                        if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
+                        {
+                            Debug.Log("CHECK");
+                            check = true;
+                        }
+
                         selectedSquare = hit.transform.GetComponent<Square>();
                         hit.transform.GetComponent<Square>().SetHighlight(true);
                         selectedPiece = selectedSquare.GetPiece();
                         List<int[]> moves = selectedPiece.GetMoves();
+
+                        if(check == true && selectedPiece.GetType() != typeof(King))
+                        {
+                            return;
+                        }
 
                         if (selectedPiece.GetType() != typeof(Pawn) && selectedPiece.GetType() != typeof(King))
                         {
@@ -210,6 +232,7 @@ public class Board : MonoBehaviour
         squares[0, 2].SetPiece(bishops[0]);
         squares[0, 3].SetPiece(queens[0]);
         squares[0, 4].SetPiece(kings[0]);
+        kingSquares[0] = squares[0, 4];
         squares[0, 5].SetPiece(bishops[1]);
         squares[0, 6].SetPiece(knights[1]);
         squares[0, 7].SetPiece(rooks[1]);
@@ -229,6 +252,7 @@ public class Board : MonoBehaviour
         squares[7, 2].SetPiece(bishops[2]);
         squares[7, 3].SetPiece(queens[1]);
         squares[7, 4].SetPiece(kings[1]);
+        kingSquares[1] = squares[7, 4];
         squares[7, 5].SetPiece(bishops[3]);
         squares[7, 6].SetPiece(knights[3]);
         squares[7, 7].SetPiece(rooks[3]);
