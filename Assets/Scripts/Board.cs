@@ -124,8 +124,7 @@ public class Board : MonoBehaviour
 
                                     if (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
                                     {
-                                        movableSquares.Add(moveSquare);
-                                        moveSquare.SetHighlight(true);
+                                        AddMovableSquare(moveSquare);
                                     }
 
                                     if (moveSquare.GetPiece() && selectedPiece.IsLinearMover())
@@ -145,20 +144,17 @@ public class Board : MonoBehaviour
                             {
                                 if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
                                     && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
-                                {
-
+                                { 
                                     moveSquares.Add(squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]]);
                                 }
                             }
 
                             if (!moveSquares[0].GetPiece()) {
-                                movableSquares.Add(moveSquares[0]);                                
-                                moveSquares[0].SetHighlight(true);
+                                AddMovableSquare(moveSquares[0]);
                                 
                                 if (selectedPawn.IsFirstMove())
                                 {
-                                    movableSquares.Add(moveSquares[1]);
-                                    moveSquares[1].SetHighlight(true);
+                                    AddMovableSquare(moveSquares[1]);
                                 }
                             }
 
@@ -168,8 +164,7 @@ public class Board : MonoBehaviour
                                 {
                                     if (moveSquares[i].GetPiece().IsWhite() != selectedPiece.IsWhite())
                                     {
-                                        movableSquares.Add(moveSquares[i]);
-                                        moveSquares[i].SetHighlight(true);
+                                        AddMovableSquare(moveSquares[i]);
                                     }
                                 }
                             }
@@ -186,8 +181,7 @@ public class Board : MonoBehaviour
 
                                     if (IsSafeSquare(selectedPiece.isWhite, moveSquare) && (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite()))
                                     {
-                                        movableSquares.Add(moveSquare);
-                                        moveSquare.SetHighlight(true);
+                                        AddMovableSquare(moveSquare);
                                     }
                                 }
                             }
@@ -218,6 +212,12 @@ public class Board : MonoBehaviour
                 Debug.Log(squares[i,j].GetX() + " " + squares[i, j].GetY());
             }
         }
+    }
+
+    private void AddMovableSquare(Square movableSquare)
+    {
+        movableSquares.Add(movableSquare);
+        movableSquare.SetHighlight(true);
     }
 
     private void SetUpPieces()
