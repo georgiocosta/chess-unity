@@ -49,7 +49,7 @@ public class Board : MonoBehaviour
             {
                 Square targetSquare = hit.transform.GetComponent<Square>();
 
-                Debug.Log("Clicked " + targetSquare.GetX() + ", " + targetSquare.GetY());
+                //Debug.Log("Clicked " + targetSquare.GetX() + ", " + targetSquare.GetY());
 
                 //Move selected
                 if (movableSquares.Find(x => x.name == targetSquare.name))
@@ -98,7 +98,7 @@ public class Board : MonoBehaviour
 
                         if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
                         {
-                            Debug.Log("CHECK");
+                            Debug.Log("CHECK, white = " + isWhiteTurn);
                             check = true;
                         }
 
@@ -284,7 +284,7 @@ public class Board : MonoBehaviour
         int y = square.GetY();
 
         //Horizontal check
-        for(int i = x; i < 8; i++)
+        for(int i = x + 1; i < 8; i++)
         {
             if(squares[i, y].GetPiece())
             {
@@ -292,7 +292,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    continue;
+                    break;
                 }
                 else if (i == x + 1 && piece.GetType() == typeof(King))
                 {
@@ -309,7 +309,7 @@ public class Board : MonoBehaviour
             }
         }
 
-        for (int i = x; i > 0; i--)
+        for (int i = x - 1; i > 0; i--)
         {
             if (squares[i, y].GetPiece())
             {
@@ -317,7 +317,7 @@ public class Board : MonoBehaviour
 
                 if(piece.isWhite == isWhite)
                 {
-                    continue;
+                    break;
                 }
                 else if (i == x - 1 && piece.GetType() == typeof(King))
                 {
@@ -335,7 +335,7 @@ public class Board : MonoBehaviour
         }
 
         //Vertical check
-        for (int i = y; i < 8; i++)
+        for (int i = y + 1; i < 8; i++)
         {
             if (squares[x, i].GetPiece())
             {
@@ -343,7 +343,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    continue;
+                    break;
                 }
                 else if (i == y + 1 && piece.GetType() == typeof(King))
                 {
@@ -360,7 +360,7 @@ public class Board : MonoBehaviour
             }
         }
 
-        for (int i = y; i > 0; i--)
+        for (int i = y - 1; i > 0; i--)
         {
             if (squares[x, i].GetPiece())
             {
@@ -368,7 +368,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    continue;
+                    break;
                 }
                 else if (i == y - 1 && piece.GetType() == typeof(King))
                 {
@@ -393,7 +393,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    continue;
+                    break;
                 }
                 else if (isWhite == true && i == 1 && piece.GetType() == typeof(Pawn))
                 {
@@ -422,7 +422,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    continue;
+                    break;
                 }
                 else if (isWhite == false && i == 1 && piece.GetType() == typeof(Pawn))
                 {
@@ -451,7 +451,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    continue;
+                    break;
                 }
                 else if (isWhite == true && i == 1 && piece.GetType() == typeof(Pawn))
                 {
@@ -480,7 +480,7 @@ public class Board : MonoBehaviour
 
                 if (piece.isWhite == isWhite)
                 {
-                    continue;
+                    break;
                 }
                 else if (isWhite == false && i == 1 && piece.GetType() == typeof(Pawn))
                 {
