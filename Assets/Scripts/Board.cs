@@ -124,6 +124,19 @@ public class Board : MonoBehaviour
 
                                     if (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
                                     {
+                                        //Determining if the move would place the king in check
+                                        selectedSquare.SetPiece(null);
+                                        moveSquare.SetPiece(selectedPiece);
+
+                                        if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
+                                        {
+                                            Debug.Log("Move would place king in check");
+                                            continue;
+                                        }
+
+                                        moveSquare.SetPiece(null);
+                                        selectedSquare.SetPiece(selectedPiece);
+
                                         AddMovableSquare(moveSquare);
                                     }
 
@@ -150,11 +163,39 @@ public class Board : MonoBehaviour
                             }
 
                             if (!moveSquares[0].GetPiece()) {
-                                AddMovableSquare(moveSquares[0]);
+                                //Determining if the move would place the king in check
+                                selectedSquare.SetPiece(null);
+                                moveSquares[0].SetPiece(selectedPiece);
+
+                                if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
+                                {
+                                    Debug.Log("Move would place king in check");
+                                }
+                                else
+                                {
+                                    AddMovableSquare(moveSquares[0]);
+                                }
+
+                                moveSquares[0].SetPiece(null);
+                                selectedSquare.SetPiece(selectedPiece);
                                 
                                 if (selectedPawn.IsFirstMove())
                                 {
-                                    AddMovableSquare(moveSquares[1]);
+                                    //Determining if the move would place the king in check
+                                    selectedSquare.SetPiece(null);
+                                    moveSquares[1].SetPiece(selectedPiece);
+
+                                    if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
+                                    {
+                                        Debug.Log("Move would place king in check");
+                                    }
+                                    else
+                                    {
+                                        AddMovableSquare(moveSquares[1]);
+                                    }
+
+                                    moveSquares[1].SetPiece(null);
+                                    selectedSquare.SetPiece(selectedPiece);
                                 }
                             }
 
@@ -164,7 +205,21 @@ public class Board : MonoBehaviour
                                 {
                                     if (moveSquares[i].GetPiece().IsWhite() != selectedPiece.IsWhite())
                                     {
-                                        AddMovableSquare(moveSquares[i]);
+                                        //Determining if the move would place the king in check
+                                        selectedSquare.SetPiece(null);
+                                        moveSquares[i].SetPiece(selectedPiece);
+
+                                        if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
+                                        {
+                                            Debug.Log("Move would place king in check");
+                                        }
+                                        else
+                                        {
+                                            AddMovableSquare(moveSquares[i]);
+                                        }
+
+                                        moveSquares[i].SetPiece(null);
+                                        selectedSquare.SetPiece(selectedPiece);
                                     }
                                 }
                             }
