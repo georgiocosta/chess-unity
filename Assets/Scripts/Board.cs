@@ -82,7 +82,19 @@ public class Board : MonoBehaviour
                     selectedPiece.transform.position = targetSquare.transform.position;
                     ClearSelection();
                     isWhiteTurn = !isWhiteTurn;
-                    check = false;
+
+                    //Determining check
+                    King king = isWhiteTurn ? kings[0] : kings[1];
+
+                    if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
+                    {
+                        Debug.Log("CHECK, white = " + isWhiteTurn);
+                        check = true;
+                    }
+                    else
+                    {
+                        check = false;
+                    }
                 }
                 //Undo selection
                 else if (selectedSquare != null)
@@ -93,14 +105,7 @@ public class Board : MonoBehaviour
                 if (hit.transform.GetComponent<Square>().GetPiece())
                 { 
                     if (isWhiteTurn == hit.transform.GetComponent<Square>().GetPiece().IsWhite()) {
-                        //Determining check before allowing selection
-                        King king = isWhiteTurn ? kings[0] : kings[1];
 
-                        if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
-                        {
-                            Debug.Log("CHECK, white = " + isWhiteTurn);
-                            check = true;
-                        }
 
                         selectedSquare = hit.transform.GetComponent<Square>();
                         hit.transform.GetComponent<Square>().SetHighlight(true);
