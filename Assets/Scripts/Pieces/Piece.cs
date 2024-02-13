@@ -5,6 +5,7 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
     public List<int[]> moves = new List<int[]>();
+    public List<int[]> validMoves = new List<int[]>();
 
     public bool isWhite;
 
@@ -55,5 +56,15 @@ public class Piece : MonoBehaviour
     public bool IsLinearMover()
     {
         return isLinearMover;
+    }
+
+    public void AddValidMove(int[] validMove)
+    {
+        validMoves.Add(validMove);
+    }
+
+    public void ClearValidMoves()
+    {
+        validMoves.Clear();
     }
 }
