@@ -197,11 +197,9 @@ public class Board : MonoBehaviour
                                 moveTargets[0].SetPiece(null);
                                 square.SetPiece(piece);
 
-                                if (pawn.IsFirstMove())
+                                if (pawn.IsFirstMove() && !moveTargets[1].GetPiece())
                                 {
                                     //Determining if the move would place the king in check
-                                    Piece temp = moveTargets[1].GetPiece();
-
                                     square.SetPiece(null);
                                     moveTargets[1].SetPiece(piece);
 
@@ -221,7 +219,7 @@ public class Board : MonoBehaviour
                                         possibleMoves++;
                                     }
 
-                                    moveTargets[1].SetPiece(temp);
+                                    moveTargets[1].SetPiece(null);
                                     square.SetPiece(piece);
                                 }
                             }
@@ -384,11 +382,9 @@ public class Board : MonoBehaviour
                                 moveSquares[0].SetPiece(null);
                                 selectedSquare.SetPiece(selectedPiece);
                                 
-                                if (selectedPawn.IsFirstMove())
+                                if (selectedPawn.IsFirstMove() && !moveSquares[1].GetPiece())
                                 {
                                     //Determining if the move would place the king in check
-                                    Piece temp = moveSquares[1].GetPiece();
-
                                     selectedSquare.SetPiece(null);
                                     moveSquares[1].SetPiece(selectedPiece);
 
@@ -406,7 +402,7 @@ public class Board : MonoBehaviour
                                         AddMovableSquare(moveSquares[1]);
                                     }
 
-                                    moveSquares[1].SetPiece(temp);
+                                    moveSquares[1].SetPiece(null);
                                     selectedSquare.SetPiece(selectedPiece);
                                 }
                             }
