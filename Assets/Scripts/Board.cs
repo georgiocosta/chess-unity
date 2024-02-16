@@ -128,7 +128,7 @@ public class Board : MonoBehaviour
                                     if (!moveTarget.GetPiece() || moveTarget.GetPiece().IsWhite() != piece.IsWhite())
                                     {
                                         //Determining if the move would place the king in check
-                                        Piece temp = square.GetPiece();
+                                        Piece temp = moveTarget.GetPiece();
 
                                         square.SetPiece(null);
                                         moveTarget.SetPiece(selectedPiece);
