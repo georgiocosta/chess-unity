@@ -140,6 +140,10 @@ public class Board : MonoBehaviour
                                         else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
                                         {
                                             Debug.Log("Move would place king in check");
+
+                                            moveTarget.SetPiece(temp);
+                                            square.SetPiece(piece);
+
                                             continue;
                                         }
 
@@ -329,6 +333,10 @@ public class Board : MonoBehaviour
                                         else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
                                         {
                                             Debug.Log("Move would place king in check");
+
+                                            moveSquare.SetPiece(temp);
+                                            selectedSquare.SetPiece(selectedPiece);
+
                                             continue;
                                         }
 
