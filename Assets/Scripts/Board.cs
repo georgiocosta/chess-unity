@@ -495,8 +495,8 @@ public class Board : MonoBehaviour
         //White pieces
         for(int i = 0; i < 8; i++)
         {
-            squares[1, i].SetPiece(pawns[i]);
             pawns[i].SetWhite(true);
+            squares[1, i].SetPiece(pawns[i]);
         }
         squares[0, 0].SetPiece(rooks[0]);
         squares[0, 1].SetPiece(knights[0]);
@@ -510,13 +510,15 @@ public class Board : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             squares[0, i].GetPiece().SetWhite(true);
+            //The piece has to be set again to update the colour
+            squares[0, i].SetPiece(squares[0, i].GetPiece());
         }
 
         //Black pieces
         for (int i = 8; i < 16; i++)
         {
-            squares[6, i - 8].SetPiece(pawns[i]);
             pawns[i].SetWhite(false);
+            squares[6, i - 8].SetPiece(pawns[i]);
         }
         squares[7, 0].SetPiece(rooks[2]);
         squares[7, 1].SetPiece(knights[2]);

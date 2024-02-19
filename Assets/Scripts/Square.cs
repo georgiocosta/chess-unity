@@ -24,11 +24,22 @@ public class Square : MonoBehaviour
     {
         piece = newPiece;
 
-        if(newPiece == null)
+        if (newPiece == null)
         {
             pieceSprite.sprite = null;
+            return;
         }
-        else if(newPiece.GetType() == typeof(Pawn))
+
+        if (newPiece.isWhite == true)
+        {
+            pieceSprite.color = Color.white;
+        }
+        else
+        {
+            pieceSprite.color = Color.black;
+        }
+
+        if(newPiece.GetType() == typeof(Pawn))
         {
             pieceSprite.sprite = sprites[0];
         }
