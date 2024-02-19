@@ -8,6 +8,10 @@ public class Square : MonoBehaviour
     private Piece piece;
     [SerializeField]
     private GameObject highlight;
+    [SerializeField]
+    private Sprite[] sprites;
+    [SerializeField]
+    private SpriteRenderer pieceSprite;
 
     private int x, y;
 
@@ -19,6 +23,35 @@ public class Square : MonoBehaviour
     public void SetPiece(Piece newPiece)
     {
         piece = newPiece;
+
+        if(newPiece == null)
+        {
+            pieceSprite.sprite = null;
+        }
+        else if(newPiece.GetType() == typeof(Pawn))
+        {
+            pieceSprite.sprite = sprites[0];
+        }
+        else if(newPiece.GetType() == typeof(Rook))
+        {
+            pieceSprite.sprite = sprites[1];
+        }
+        else if (newPiece.GetType() == typeof(Knight))
+        {
+            pieceSprite.sprite = sprites[2];
+        }
+        else if (newPiece.GetType() == typeof(Bishop))
+        {
+            pieceSprite.sprite = sprites[3];
+        }
+        else if (newPiece.GetType() == typeof(King))
+        {
+            pieceSprite.sprite = sprites[4];
+        }
+        else if (newPiece.GetType() == typeof(Queen))
+        {
+            pieceSprite.sprite = sprites[5];
+        }
     }
 
     public void SetXY(int x, int y)

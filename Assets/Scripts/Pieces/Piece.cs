@@ -37,6 +37,7 @@ public class Piece : MonoBehaviour
     public virtual void SetWhite(bool isWhite)
     {
         this.isWhite = isWhite;
+        /*
         SpriteRenderer spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         if (isWhite == true)
         {
@@ -45,7 +46,7 @@ public class Piece : MonoBehaviour
         else
         {
             spriteRenderer.color = Color.black;
-        }
+        } */
     }
 
     public bool IsWhite()
@@ -66,5 +67,10 @@ public class Piece : MonoBehaviour
     public void ClearValidMoves()
     {
         validMoves.Clear();
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawIcon(transform.position, "chess-pawn.png", true);
     }
 }
