@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Board : MonoBehaviour
 {
@@ -27,6 +28,9 @@ public class Board : MonoBehaviour
 
     private bool isWhiteTurn;
     private bool check;
+
+    [SerializeField]
+    private GameObject checkmatePanel;
 
     void Start()
     {
@@ -285,6 +289,7 @@ public class Board : MonoBehaviour
                     if (possibleMoves == 0)
                     {
                         Debug.Log("Checkmate");
+                        checkmatePanel.SetActive(true);
                     }
                 }
                 //Undo selection
@@ -801,5 +806,10 @@ public class Board : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadSceneAsync("Main");
     }
 }
