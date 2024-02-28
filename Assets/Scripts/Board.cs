@@ -84,6 +84,7 @@ public class Board : MonoBehaviour
                     selectedSquare.SetPiece(null);
                     targetSquare.SetPiece(selectedPiece);
                     selectedPiece.transform.position = targetSquare.transform.position;
+                    selectedPiece.ClearValidMoves();
                     ClearSelection();
                     isWhiteTurn = !isWhiteTurn;
 
@@ -105,6 +106,8 @@ public class Board : MonoBehaviour
                     foreach(Square square in squares)
                     {
                         Piece piece = square.GetPiece();
+
+                        //piece.ClearValidMoves();
 
                         if (piece == null || piece.isWhite != isWhiteTurn)
                         {
@@ -154,7 +157,7 @@ public class Board : MonoBehaviour
                                         moveTarget.SetPiece(temp);
                                         square.SetPiece(piece);
 
-                                        //AddMovableSquare(moveSquare);
+                                        piece.AddValidMove(moves[i]);
                                         possibleMoves++;
                                     }
 
@@ -189,7 +192,7 @@ public class Board : MonoBehaviour
                                 if (check && IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
                                 {
                                     Debug.Log("Move would break check");
-                                    //AddMovableSquare(moveSquares[0]);
+                                    piece.AddValidMove(moves[0]);
                                     possibleMoves++;
                                 }
                                 else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
@@ -198,7 +201,7 @@ public class Board : MonoBehaviour
                                 }
                                 else
                                 {
-                                    //AddMovableSquare(moveSquares[0]);
+                                    piece.AddValidMove(moves[0]);
                                     possibleMoves++;
                                 }
 
@@ -214,7 +217,7 @@ public class Board : MonoBehaviour
                                     if (check && IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
                                     {
                                         Debug.Log("Move would break check");
-                                        //AddMovableSquare(moveSquares[1]);
+                                        piece.AddValidMove(moves[1]);
                                         possibleMoves++;
                                     }
                                     else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
@@ -223,7 +226,7 @@ public class Board : MonoBehaviour
                                     }
                                     else
                                     {
-                                        //AddMovableSquare(moveSquares[1]);
+                                        piece.AddValidMove(moves[1]);
                                         possibleMoves++;
                                     }
 
@@ -247,7 +250,7 @@ public class Board : MonoBehaviour
                                         if (check && IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
                                         {
                                             Debug.Log("Move would break check");
-                                            //AddMovableSquare(moveTargets[i]);
+                                            piece.AddValidMove(moves[i]);
                                             possibleMoves++;
                                         }
                                         else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
@@ -256,7 +259,7 @@ public class Board : MonoBehaviour
                                         }
                                         else
                                         {
-                                            //AddMovableSquare(moveSquares[i]);
+                                            piece.AddValidMove(moves[i]);
                                             possibleMoves++;
                                         }
 
@@ -278,7 +281,7 @@ public class Board : MonoBehaviour
 
                                     if (IsSafeSquare(piece.isWhite, moveTarget) && (!moveTarget.GetPiece() || moveTarget.GetPiece().IsWhite() != piece.IsWhite()))
                                     {
-                                        //AddMovableSquare(moveSquare);
+                                        piece.AddValidMove(moves[i]);
                                         possibleMoves++;
                                     }
                                 }
@@ -306,169 +309,16 @@ public class Board : MonoBehaviour
                         selectedSquare = hit.transform.GetComponent<Square>();
                         hit.transform.GetComponent<Square>().SetHighlight(true);
                         selectedPiece = selectedSquare.GetPiece();
-                        List<int[]> moves = selectedPiece.GetMoves();
+                        List<int[]> validMoves = selectedPiece.GetValidMoves();
 
-                        /*
-                        if(check == true && selectedPiece.GetType() != typeof(King))
+                        for(int i = 0; i < validMoves.Count; i++)
                         {
-                            return;
-                        } */
+                            Square moveTarget = squares[selectedSquare.GetX() + validMoves[i][0], selectedSquare.GetY() + validMoves[i][1]];
 
-                        if (selectedPiece.GetType() != typeof(Pawn) && selectedPiece.GetType() != typeof(King))
-                        {
-                            for (int i = 0; i < moves.Count; i++)
-                            {
-                                if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
-                                    && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
-                                {
-
-                                    Square moveSquare = squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]];
-
-                                    if (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite())
-                                    {
-                                        //Determining if the move would place the king in check
-                                        Piece temp = moveSquare.GetPiece();
-                                        
-                                        selectedSquare.SetPiece(null);
-                                        moveSquare.SetPiece(selectedPiece);
-
-                                        if(check && IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1])) {
-                                            Debug.Log("Move would break check");
-                                        }
-                                        else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
-                                        {
-                                            Debug.Log("Move would place king in check");
-
-                                            moveSquare.SetPiece(temp);
-                                            selectedSquare.SetPiece(selectedPiece);
-
-                                            continue;
-                                        }
-
-                                        moveSquare.SetPiece(temp);
-                                        selectedSquare.SetPiece(selectedPiece);
-
-                                        AddMovableSquare(moveSquare);
-                                    }
-
-                                    if (moveSquare.GetPiece() && selectedPiece.IsLinearMover())
-                                    {
-                                        //set a variable m for multiples to skip, then move to next iteration of loop if i % m 
-                                        i += (7 - ((i + 1) % 7));
-                                    }
-                                }
-                            }
+                            AddMovableSquare(moveTarget);
                         }
-                        else if (selectedPiece.GetType() == typeof(Pawn))
-                        {
-                            Pawn selectedPawn = (Pawn)selectedPiece;
-                            List<Square> moveSquares = new List<Square>();
 
-                            for (int i = 0; i < moves.Count; i++)
-                            {
-                                if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
-                                    && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
-                                { 
-                                    moveSquares.Add(squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]]);
-                                }
-                            }
 
-                            if (!moveSquares[0].GetPiece()) {
-                                //Determining if the move would place the king in check
-                                selectedSquare.SetPiece(null);
-                                moveSquares[0].SetPiece(selectedPiece);
-
-                                if (check && IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
-                                {
-                                    Debug.Log("Move would break check");
-                                    AddMovableSquare(moveSquares[0]);
-                                }
-                                else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
-                                {
-                                    Debug.Log("Move would place king in check");
-                                }
-                                else
-                                {
-                                    AddMovableSquare(moveSquares[0]);
-                                }
-
-                                moveSquares[0].SetPiece(null);
-                                selectedSquare.SetPiece(selectedPiece);
-                                
-                                if (selectedPawn.IsFirstMove() && !moveSquares[1].GetPiece())
-                                {
-                                    //Determining if the move would place the king in check
-                                    selectedSquare.SetPiece(null);
-                                    moveSquares[1].SetPiece(selectedPiece);
-
-                                    if (check && IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
-                                    {
-                                        Debug.Log("Move would break check");
-                                        AddMovableSquare(moveSquares[1]);
-                                    }
-                                    else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
-                                    {
-                                        Debug.Log("Move would place king in check");
-                                    }
-                                    else
-                                    {
-                                        AddMovableSquare(moveSquares[1]);
-                                    }
-
-                                    moveSquares[1].SetPiece(null);
-                                    selectedSquare.SetPiece(selectedPiece);
-                                }
-                            }
-
-                            for (int i = 2; i < moveSquares.Count; i++)
-                            {
-                                if (moveSquares[i].GetPiece())
-                                {
-                                    if (moveSquares[i].GetPiece().IsWhite() != selectedPiece.IsWhite())
-                                    {
-                                        //Determining if the move would place the king in check
-                                        Piece temp = moveSquares[i].GetPiece();
-
-                                        selectedSquare.SetPiece(null);
-                                        moveSquares[i].SetPiece(selectedPiece);
-
-                                        if (check && IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
-                                        {
-                                            Debug.Log("Move would break check");
-                                            AddMovableSquare(moveSquares[i]);
-                                        }
-                                        else if (!IsSafeSquare(isWhiteTurn, kingSquares[isWhiteTurn ? 0 : 1]))
-                                        {
-                                            Debug.Log("Move would place king in check");
-                                        }
-                                        else
-                                        {
-                                            AddMovableSquare(moveSquares[i]);
-                                        }
-
-                                        moveSquares[i].SetPiece(temp);
-                                        selectedSquare.SetPiece(selectedPiece);
-                                    }
-                                }
-                            }
-                        }
-                        else if(selectedPiece.GetType() == typeof(King))
-                        {
-                            for (int i = 0; i < moves.Count; i++)
-                            {
-                                if (selectedSquare.GetX() + moves[i][0] < 8 && selectedSquare.GetX() + moves[i][0] >= 0
-                                    && selectedSquare.GetY() + moves[i][1] < 8 && selectedSquare.GetY() + moves[i][1] >= 0)
-                                {
-
-                                    Square moveSquare = squares[selectedSquare.GetX() + moves[i][0], selectedSquare.GetY() + moves[i][1]];
-
-                                    if (IsSafeSquare(selectedPiece.isWhite, moveSquare) && (!moveSquare.GetPiece() || moveSquare.GetPiece().IsWhite() != selectedPiece.IsWhite()))
-                                    {
-                                        AddMovableSquare(moveSquare);
-                                    }
-                                }
-                            }
-                        }
                     }
                 }
             }
@@ -510,6 +360,8 @@ public class Board : MonoBehaviour
         {
             pawns[i].SetWhite(true);
             squares[1, i].SetPiece(pawns[i]);
+            pawns[i].AddValidMove(pawns[i].GetMoves()[0]);
+            pawns[i].AddValidMove(pawns[i].GetMoves()[1]);
         }
         squares[0, 0].SetPiece(rooks[0]);
         squares[0, 1].SetPiece(knights[0]);
@@ -526,6 +378,11 @@ public class Board : MonoBehaviour
             //The piece has to be set again to update the colour
             squares[0, i].SetPiece(squares[0, i].GetPiece());
         }
+
+        knights[0].AddValidMove(new int[] { 2, 1 });
+        knights[0].AddValidMove(new int[] { 2, -1 });
+        knights[1].AddValidMove(new int[] { 2, 1 });
+        knights[1].AddValidMove(new int[] { 2, -1 }); 
 
         //Black pieces
         for (int i = 8; i < 16; i++)

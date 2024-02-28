@@ -69,6 +69,11 @@ public class Piece : MonoBehaviour
         validMoves.Clear();
     }
 
+    public List<int[]> GetValidMoves()
+    {
+        return validMoves;
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.DrawIcon(transform.position, "chess-pawn.png", true);
