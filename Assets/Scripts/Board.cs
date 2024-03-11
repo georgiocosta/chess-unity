@@ -158,10 +158,11 @@ public class Board : MonoBehaviour
                                         square.SetPiece(piece);
 
                                         piece.AddValidMove(moves[i]);
+                                        Debug.Log("i: " + i);
                                         possibleMoves++;
                                     }
 
-                                    if (square.GetPiece() && piece.IsLinearMover())
+                                    if (moveTarget.GetPiece() && piece.IsLinearMover())
                                     {
                                         //set a variable m for multiples to skip, then move to next iteration of loop if i % m 
                                         i += (7 - ((i + 1) % 7));
